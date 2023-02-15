@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/created-by: application-service
+    app.kubernetes.io/instance: loadtwqd4087-tenant-component
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: loadtwqd4087-tenant-component
+    app.kubernetes.io/part-of: loadtwqd4087-tenant-app
+  name: loadtwqd4087-tenant-component
+  namespace: loadtwqd4087-tenant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: devfile-dotnet-deploy
+      app.kubernetes.io/instance: loadtwqd4087-tenant-component
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: devfile-dotnet-deploy
+        app.kubernetes.io/instance: loadtwqd4087-tenant-component
+    spec:
+      containers:
+      - image: quay.io/redhat-appstudio-qe/test-images:87ee2dee837144af8b3cef874f08ba37
+        imagePullPolicy: Always
+        name: main
+        ports:
+        - containerPort: 8081
+          name: http
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 100m
+            memory: 300Mi
+          requests:
+            cpu: 10m
+            memory: 100Mi
+status: {}
